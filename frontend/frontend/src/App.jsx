@@ -13,7 +13,7 @@ const App = () => {
 
     const register = async () => {
         try {
-            await axios.post('https://deepresto.onrender.com/register', { username, mobileno, email, password });
+            await axios.post('https://deepresto-1.onrender.com/', { username, mobileno, email, password });
             setMessage('User registered successfully');
             setIsRegistered(true);
         } catch (error) {
@@ -23,7 +23,7 @@ const App = () => {
 
     const login = async () => {
         try {
-            const response = await axios.post('https://deepresto.onrender.com/login', { email: loginEmail, password: loginPassword });
+            const response = await axios.post('https://deepresto-1.onrender.com/login', { email: loginEmail, password: loginPassword });
             setMessage(`Logged in with token: ${response.data.token}`);
         } catch (error) {
             setMessage(error.response?.data || 'Error logging in');
