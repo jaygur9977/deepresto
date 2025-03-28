@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const path=require('path');
 
 const app = express();
 const PORT = 5000;
@@ -11,7 +12,6 @@ const PORT = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Use 127.0.0.1 instead of localhost to avoid IPv6 issues
 mongoose.connect('mongodb+srv://test-user:997763@cluster1.jmtcmmp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -85,6 +85,13 @@ app.get('/user', async (req, res) => {
     }
 });
 
+const _dirname=path.resolve();
+
+
+app.use(express.static(path.join(_dirname, "/app/dist")))
+app.get("*",(_,res)=>{
+    res.sendFile(path.resolve(_dirname, "app", "dist", "index.html"));
+})
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
